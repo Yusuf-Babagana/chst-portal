@@ -1,0 +1,44 @@
+/* Custom CSS for CHSTH Admission Portal */
+
+/* You can add custom school-specific styles here */
+
+.school-logo {
+    max-width: 100px;
+    height: auto;
+}
+
+.application-form-section {
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* Print styles for PDF */
+@media print {
+    .navbar,
+    .footer,
+    .btn,
+    .no-print {
+        display: none !important;
+    }
+
+    .card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 1rem;
+    }
+
+    .card {
+        margin-bottom: 15px;
+    }
+
+    .btn-lg {
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
+}

@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block title %}Welcome - CHSTH Admission Portal{% endblock %}
+
+{% block content %}
+<div class="row mt-5">
+    <div class="col-md-8 offset-md-2">
+        <div class="text-center mb-5">
+            <h1 class="display-4 text-primary">
+                <i class="fas fa-graduation-cap"></i> Welcome to CHSTH
+            </h1>
+            <p class="lead">College of Health Sciences and Technology Hadejia</p>
+            <hr class="my-4">
+        </div>
+
+        <div class="card">
+            <div class="card-body text-center p-5">
+                <h3 class="mb-4">Online Admission Application Portal</h3>
+                <p class="mb-4">
+                    Apply for admission into any of our prestigious health science programs.
+                    The application process is simple, secure, and mobile-friendly.
+                </p>
+
+                <div class="row mt-5">
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <i class="fas fa-user-plus fa-3x text-primary mb-3"></i>
+                                <h5>New Applicant?</h5>
+                                <p>Create an account to start your application</p>
+                                <a href="{% url 'signup' %}" class="btn btn-primary btn-block">
+                                    Sign Up Now
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <i class="fas fa-sign-in-alt fa-3x text-success mb-3"></i>
+                                <h5>Returning Applicant?</h5>
+                                <p>Continue your application process</p>
+                                <a href="{% url 'login' %}" class="btn btn-success btn-block">
+                                    Login
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-4">
+            <div class="card-header">
+                <i class="fas fa-info-circle"></i> Available Programs
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled">
+                    <li class="mb-2"><i class="fas fa-check text-success"></i> Diploma in Community Health (SCHEW)</li>
+                    <li class="mb-2"><i class="fas fa-check text-success"></i> Certificate in Community Health (JCHEW)</li>
+                    <li class="mb-2"><i class="fas fa-check text-success"></i> Diploma in Health Information Management</li>
+                    <li class="mb-2"><i class="fas fa-check text-success"></i> Diploma in Environmental Health</li>
+                    <li class="mb-2"><i class="fas fa-check text-success"></i> Diploma in X-Ray and Imaging</li>
+                    <li class="mb-2"><i class="fas fa-check text-success"></i> Diploma in Nutrition and Dietetics</li>
+                    <li class="mb-2"><i class="fas fa-check text-success"></i> Retraining in Community Health (JCHEW holders)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card mt-4">
+            <div class="card-header">
+                <i class="fas fa-money-bill-wave"></i> Application Fee
+            </div>
+            <div class="card-body">
+                <p class="mb-2">
+                    <strong>Application Fee:</strong> ₦7,500
+                </p>
+                <p class="text-muted small">
+                    <i class="fas fa-info-circle"></i>
+                    Payment can be waived with a valid referral code.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

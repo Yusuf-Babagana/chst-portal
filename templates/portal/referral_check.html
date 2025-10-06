@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Referral Code - CHSTH Admission Portal{% endblock %}
+
+{% block content %}
+<div class="row mt-4">
+    <div class="col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-header text-center">
+                <h4><i class="fas fa-ticket-alt"></i> Referral Code or Payment</h4>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-info">
+                    <h5><i class="fas fa-info-circle"></i> Two Ways to Proceed:</h5>
+                    <ol>
+                        <li>Enter a valid referral code below to skip payment</li>
+                        <li>Click "Proceed to Payment" to pay ₦7,500 application fee</li>
+                    </ol>
+                </div>
+
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="id_code">
+                            <i class="fas fa-ticket-alt"></i> Referral Code (Optional)
+                        </label>
+                        {{ form.code }}
+                        <small class="form-text text-muted">
+                            If you have a referral code, enter it above and click "Apply Code"
+                        </small>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-2">
+                            <button type="submit" class="btn btn-success btn-block">
+                                <i class="fas fa-check"></i> Apply Code
+                            </button>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <a href="{% url 'payment' %}" class="btn btn-primary btn-block">
+                                <i class="fas fa-credit-card"></i> Proceed to Payment
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

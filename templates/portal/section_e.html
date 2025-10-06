@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Section E - Declaration & Documents{% endblock %}
+
+{% block content %}
+<div class="row mt-4">
+    <div class="col-md-10 offset-md-1">
+        <div class="card">
+            <div class="card-header">
+                <h4><i class="fas fa-file-signature"></i> Section E: Declaration & Document Upload</h4>
+            </div>
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data" novalidate>
+                    {% csrf_token %}
+
+                    <div class="mb-4">
+                        <h5>Declaration</h5>
+                        {{ form|crispy }}
+                    </div>
+
+                    <hr>
+
+                    <div class="mb-4">
+                        <h5>Upload Documents</h5>
+                        <p class="text-muted">Upload your credentials (SSCE results, certificates, etc.)</p>
+
+                        {{ formset.management_form }}
+
+                        {% for form in formset %}
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    {{ form|crispy }}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>Important:</strong> Once you submit this form, your application will be finalized and sent for review.
+                    </div>
+
+                    <div class="mt-4">
+                        <button type="submit" class="btn btn-success btn-lg">
+                            <i class="fas fa-paper-plane"></i> Submit Application
+                        </button>
+                        <a href="{% url 'dashboard' %}" class="btn btn-secondary btn-lg">
+                            <i class="fas fa-arrow-left"></i> Back to Dashboard
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

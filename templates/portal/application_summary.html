@@ -1,0 +1,226 @@
+{% extends 'base.html' %}
+
+{% block title %}Application Summary{% endblock %}
+
+{% block content %}
+<div class="row mt-4">
+    <div class="col-md-10 offset-md-1">
+        <div class="text-center mb-4">
+            <h2>
+                <i class="fas fa-check-circle text-success"></i>
+                Application Submitted Successfully!
+            </h2>
+            <p class="lead">Application Number: <strong>{{ application.application_number }}</strong></p>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5><i class="fas fa-user"></i> Personal Information</h5>
+            </div>
+            <div class="card-body">
+                {% if application.passport_photo %}
+                    <img src="{{ application.passport_photo.url }}" alt="Passport" class="img-thumbnail mb-3" style="width: 150px; height: 150px;">
+                {% endif %}
+                <table class="table table-bordered">
+                    <tr>
+                        <th width="30%">Full Name:</th>
+                        <td>{{ application.first_name }} {{ application.surname }} {{ application.other_names }}</td>
+                    </tr>
+                    <tr>
+                        <th>Date of Birth:</th>
+                        <td>{{ application.date_of_birth|date:"F d, Y" }}</td>
+                    </tr>
+                    <tr>
+                        <th>Phone:</th>
+                        <td>{{ application.phone }}</td>
+                    </tr>
+                    <tr>
+                        <th>Email:</th>
+                        <td>{{ application.email }}</td>
+                    </tr>
+                    <tr>
+                        <th>Address:</th>
+                        <td>{{ application.address }}</td>
+                    </tr>
+                    <tr>
+                        <th>LGA:</th>
+                        <td>{{ application.lga }}</td>
+                    </tr>
+                    <tr>
+                        <th>State of Origin:</th>
+                        <td>{{ application.state_of_origin }}</td>
+                    </tr>
+                </table>
+
+                <h6 class="mt-4">Guardian/Next of Kin</h6>
+                <table class="table table-bordered">
+                    <tr>
+                        <th width="30%">Name:</th>
+                        <td>{{ application.guardian_name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Phone:</th>
+                        <td>{{ application.guardian_phone }}</td>
+                    </tr>
+                    <tr>
+                        <th>Address:</th>
+                        <td>{{ application.guardian_address }}</td>
+                    </tr>
+                    <tr>
+                        <th>Relationship:</th>
+                        <td>{{ application.guardian_relationship }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        {% if schools %}
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5><i class="fas fa-school"></i> Schools Attended</h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>School Name</th>
+                            <th>From</th>
+                            <th>To</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for school in schools %}
+                        <tr>
+                            <td>{{ school.school_name }}</td>
+                            <td>{{ school.from_year }}</td>
+                            <td>{{ school.to_year }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if results %}
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5><i class="fas fa-certificate"></i> SSCE Results</h5>
+            </div>
+            <div class="card-body">
+                {% for result in results %}
+                    <h6>{{ result.get_exam_type_display }} - {{ result.year }}</h6>
+                    <p><strong>Exam Number:</strong> {{ result.exam_number }}</p>
+
+                    {% if not result.awaiting_result %}
+                    <table class="table table-sm table-bordered mb-4">
+                        <thead>
+                            <tr>
+                                <th>Subject</th>
+                                <th>Grade</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>English</td>
+                                <td>{{ result.english }}</td>
+                            </tr>
+                            <tr>
+                                <td>Mathematics</td>
+                                <td>{{ result.mathematics }}</td>
+                            </tr>
+                            <tr>
+                                <td>Biology</td>
+                                <td>{{ result.biology }}</td>
+                            </tr>
+                            <tr>
+                                <td>Chemistry</td>
+                                <td>{{ result.chemistry }}</td>
+                            </tr>
+                            <tr>
+                                <td>Physics</td>
+                                <td>{{ result.physics }}</td>
+                            </tr>
+                            {% if result.subject_6 %}
+                            <tr>
+                                <td>{{ result.subject_6 }}</td>
+                                <td>{{ result.grade_6 }}</td>
+                            </tr>
+                            {% endif %}
+                            {% if result.subject_7 %}
+                            <tr>
+                                <td>{{ result.subject_7 }}</td>
+                                <td>{{ result.grade_7 }}</td>
+                            </tr>
+                            {% endif %}
+                            {% if result.subject_8 %}
+                            <tr>
+                                <td>{{ result.subject_8 }}</td>
+                                <td>{{ result.grade_8 }}</td>
+                            </tr>
+                            {% endif %}
+                            {% if result.subject_9 %}
+                            <tr>
+                                <td>{{ result.subject_9 }}</td>
+                                <td>{{ result.grade_9 }}</td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                        <p class="text-warning"><i class="fas fa-clock"></i> Awaiting Result</p>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5><i class="fas fa-book"></i> Course Selection</h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <tr>
+                        <th width="30%">First Choice:</th>
+                        <td>{{ application.get_first_choice_display }}</td>
+                    </tr>
+                    <tr>
+                        <th>Second Choice:</th>
+                        <td>{{ application.get_second_choice_display }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        {% if documents %}
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5><i class="fas fa-file-upload"></i> Uploaded Documents</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    {% for doc in documents %}
+                    <li class="list-group-item">
+                        <i class="fas fa-file"></i> {{ doc.get_document_type_display }}
+                        <a href="{{ doc.document_file.url }}" target="_blank" class="btn btn-sm btn-outline-primary float-right">
+                            <i class="fas fa-download"></i> Download
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="text-center mb-5">
+            <a href="{% url 'download_pdf' %}" class="btn btn-success btn-lg mr-2">
+                <i class="fas fa-download"></i> Download PDF
+            </a>
+            <a href="{% url 'dashboard' %}" class="btn btn-primary btn-lg">
+                <i class="fas fa-home"></i> Back to Dashboard
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
