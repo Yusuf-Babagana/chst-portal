@@ -105,4 +105,4 @@ LOGOUT_REDIRECT_URL = 'home'
 PAYSTACK_PUBLIC_KEY = os.environ.get('PAYSTACK_PUBLIC_KEY', 'pk_test_xxxxxxxxxxxx')
 PAYSTACK_SECRET_KEY = os.environ.get('PAYSTACK_SECRET_KEY', 'sk_test_xxxxxxxxxxxx')
 
-APPLICATION_FEE = 7500
+APPLICATION_FEE = 12550
