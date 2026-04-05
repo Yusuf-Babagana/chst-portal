@@ -30,7 +30,11 @@ def signup_view(request):
         form = SignupForm(request.POST)
         if form.is_valid():
             user = form.save()
-            Student.objects.create(user=user, phone=form.cleaned_data.get('phone'))
+            # Use get_or_create to prevent duplicates
+            Student.objects.get_or_create(
+                user=user, 
+                defaults={'phone': form.cleaned_data.get('phone')}
+            )
             login(request, user)
             messages.success(request, 'Account created successfully!')
             return redirect('referral_check')
@@ -71,7 +75,12 @@ def logout_view(request):
 
 @login_required
 def referral_check(request):
-    student = request.user.student
+    try:
+        student = request.user.student
+    except Student.DoesNotExist:
+        # Create student profile if it doesn't exist
+        student = Student.objects.create(user=request.user)
+        messages.info(request, 'Student profile created successfully.')
 
     if student.has_paid or student.used_referral:
         return redirect('dashboard')
@@ -106,7 +115,12 @@ def referral_check(request):
 
 @login_required
 def payment(request):
-    student = request.user.student
+    try:
+        student = request.user.student
+    except Student.DoesNotExist:
+        # Create student profile if it doesn't exist
+        student = Student.objects.create(user=request.user)
+        messages.info(request, 'Student profile created successfully.')
 
     if student.has_paid or student.used_referral:
         return redirect('dashboard')
@@ -169,7 +183,12 @@ def payment_callback(request):
 
 @login_required
 def dashboard(request):
-    student = request.user.student
+    try:
+        student = request.user.student
+    except Student.DoesNotExist:
+        # Create student profile if it doesn't exist
+        student = Student.objects.create(user=request.user)
+        messages.info(request, 'Student profile created successfully.')
 
     if not (student.has_paid or student.used_referral):
         return redirect('referral_check')
@@ -189,7 +208,12 @@ def dashboard(request):
 
 @login_required
 def section_a(request):
-    student = request.user.student
+    try:
+        student = request.user.student
+    except Student.DoesNotExist:
+        # Create student profile if it doesn't exist
+        student = Student.objects.create(user=request.user)
+        messages.info(request, 'Student profile created successfully.')
 
     if not (student.has_paid or student.used_referral):
         return redirect('referral_check')
@@ -215,7 +239,12 @@ def section_a(request):
 
 @login_required
 def section_b(request):
-    student = request.user.student
+    try:
+        student = request.user.student
+    except Student.DoesNotExist:
+        # Create student profile if it doesn't exist
+        student = Student.objects.create(user=request.user)
+        messages.info(request, 'Student profile created successfully.')
 
     if not (student.has_paid or student.used_referral):
         return redirect('referral_check')
@@ -241,7 +270,12 @@ def section_b(request):
 
 @login_required
 def section_c(request):
-    student = request.user.student
+    try:
+        student = request.user.student
+    except Student.DoesNotExist:
+        # Create student profile if it doesn't exist
+        student = Student.objects.create(user=request.user)
+        messages.info(request, 'Student profile created successfully.')
 
     if not (student.has_paid or student.used_referral):
         return redirect('referral_check')
@@ -267,7 +301,12 @@ def section_c(request):
 
 @login_required
 def section_d(request):
-    student = request.user.student
+    try:
+        student = request.user.student
+    except Student.DoesNotExist:
+        # Create student profile if it doesn't exist
+        student = Student.objects.create(user=request.user)
+        messages.info(request, 'Student profile created successfully.')
 
     if not (student.has_paid or student.used_referral):
         return redirect('referral_check')
@@ -293,7 +332,12 @@ def section_d(request):
 
 @login_required
 def section_e(request):
-    student = request.user.student
+    try:
+        student = request.user.student
+    except Student.DoesNotExist:
+        # Create student profile if it doesn't exist
+        student = Student.objects.create(user=request.user)
+        messages.info(request, 'Student profile created successfully.')
 
     if not (student.has_paid or student.used_referral):
         return redirect('referral_check')
@@ -329,7 +373,12 @@ def section_e(request):
 
 @login_required
 def application_summary(request):
-    student = request.user.student
+    try:
+        student = request.user.student
+    except Student.DoesNotExist:
+        # Create student profile if it doesn't exist
+        student = Student.objects.create(user=request.user)
+        messages.info(request, 'Student profile created successfully.')
 
     try:
         application = student.application
@@ -350,7 +399,11 @@ def application_summary(request):
 def download_pdf(request):
     from .utils import generate_application_pdf
 
-    student = request.user.student
+    try:
+        student = request.user.student
+    except Student.DoesNotExist:
+        messages.error(request, 'No student profile found.')
+        return redirect('dashboard')
 
     try:
         application = student.application
