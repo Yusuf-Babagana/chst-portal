@@ -89,6 +89,8 @@ class Application(models.Model):
     date_of_birth = models.DateField(null=True, blank=True)
     phone = models.CharField(max_length=15, blank=True)
     email = models.EmailField(blank=True)
+    jamb_number = models.CharField(max_length=50, blank=True)
+    jamb_score = models.IntegerField(null=True, blank=True)
     address = models.TextField(blank=True)
     lga = models.CharField(max_length=100, blank=True)
     state_of_origin = models.CharField(max_length=100, blank=True)

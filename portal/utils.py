@@ -64,6 +64,8 @@ def generate_application_pdf(application):
         ['Surname:', application.surname or ''],
         ['Other Names:', application.other_names or ''],
         ['Date of Birth:', str(application.date_of_birth) if application.date_of_birth else ''],
+        ['JAMB Number:', application.jamb_number or ''],
+        ['JAMB Score:', str(application.jamb_score) if application.jamb_score else ''],
         ['Phone:', application.phone or ''],
         ['Email:', application.email or ''],
         ['Address:', application.address or ''],

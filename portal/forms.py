@@ -46,7 +46,7 @@ class SectionAForm(forms.ModelForm):
         model = Application
         fields = [
             'passport_photo', 'first_name', 'surname', 'other_names',
-            'date_of_birth', 'phone', 'email', 'address', 'lga', 'state_of_origin',
+            'date_of_birth', 'phone', 'email', 'jamb_number', 'jamb_score', 'address', 'lga', 'state_of_origin',
             'guardian_name', 'guardian_phone', 'guardian_address', 'guardian_relationship'
         ]
         widgets = {
@@ -117,6 +117,11 @@ class SectionDForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        # Restrict courses in the template while preserving models
+        allowed_course = [('', '---------'), ('diploma_schew', 'National Diploma in Community Health (ND CHEW)')]
+        self.fields['first_choice'].choices = allowed_course
+        self.fields['second_choice'].choices = allowed_course
+        
         for field in self.fields:
             self.fields[field].widget.attrs.update({'class': 'form-control'})
 
