@@ -4,25 +4,30 @@
 {% block title %}Login - CHSTH Admission Portal{% endblock %}
 
 {% block content %}
-<div class="row mt-5">
-    <div class="col-md-6 offset-md-3">
-        <div class="card">
-            <div class="card-header text-center">
-                <h4><i class="fas fa-sign-in-alt"></i> Login to Your Account</h4>
+<div class="row justify-content-center align-items-center" style="min-height: 70vh;">
+    <div class="col-md-8 col-lg-6 col-xl-5">
+        <div class="card border-0 shadow-lg" style="border-radius: 20px;">
+            <div class="card-header bg-transparent border-bottom-0 text-center pt-5 pb-0">
+                <div class="bg-primary text-white rounded-circle d-inline-flex justify-content-center align-items-center mb-3 shadow-sm" style="width: 70px; height: 70px;">
+                    <i class="fas fa-user-lock fs-3"></i>
+                </div>
+                <h3 class="fw-bold text-dark">Welcome Back</h3>
+                <p class="text-muted">Sign in to continue your portal application.</p>
             </div>
-            <div class="card-body">
+            <div class="card-body p-5 pt-4">
                 <form method="post" novalidate>
                     {% csrf_token %}
                     {{ form|crispy }}
-                    <button type="submit" class="btn btn-primary btn-block mt-3">
-                        <i class="fas fa-sign-in-alt"></i> Login
+                    <button type="submit" class="btn btn-primary w-100 btn-lg rounded-pill shadow-sm mt-4 hover-lift">
+                        <i class="fas fa-sign-in-alt me-2"></i> Log In
                     </button>
                 </form>
 
-                <hr>
-                <p class="text-center mb-0">
-                    Don't have an account? <a href="{% url 'signup' %}">Sign up here</a>
-                </p>
+                <div class="text-center mt-5">
+                    <p class="text-muted mb-0">
+                        Don't have an account? <a href="{% url 'signup' %}" class="fw-bold text-primary tracking-wider text-decoration-none border-bottom border-primary">Sign up here</a>
+                    </p>
+                </div>
             </div>
         </div>
     </div>

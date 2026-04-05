@@ -3,230 +3,185 @@
 {% block title %}Application Summary{% endblock %}
 
 {% block content %}
-<div class="row mt-4">
-    <div class="col-md-10 offset-md-1">
-        <div class="text-center mb-4">
-            <h2>
-                <i class="fas fa-check-circle text-success"></i>
-                Application Submitted Successfully!
-            </h2>
-            <p class="lead">Application Number: <strong>{{ application.application_number }}</strong></p>
+<div class="row justify-content-center pt-3 pb-5">
+    <div class="col-lg-10 col-xl-9">
+        <div class="text-center mb-5">
+            <div class="bg-success text-white rounded-circle d-inline-flex justify-content-center align-items-center mb-3 shadow" style="width: 80px; height: 80px;">
+                <i class="fas fa-check fs-2"></i>
+            </div>
+            <h2 class="fw-extrabold text-success mb-2">Application Successfully Reconciled!</h2>
+            <p class="lead text-muted bg-white d-inline-block px-4 py-2 rounded-pill shadow-sm border mt-2">
+                Application Tracking ID: <strong class="text-primary ms-2">{{ application.application_number }}</strong>
+            </p>
         </div>
 
-        <div class="card mb-4">
-            <div class="card-header">
-                <h5><i class="fas fa-user"></i> Personal Information</h5>
+        <div class="card border-0 shadow-sm mb-4" style="border-radius: 20px;">
+            <div class="card-header bg-transparent border-bottom-0 pt-4 px-4 px-lg-5">
+                <h5 class="fw-bold text-dark mb-0"><i class="fas fa-user-circle text-primary me-2"></i> Personal Information</h5>
             </div>
-            <div class="card-body">
-                {% if application.passport_photo %}
-                    <img src="{{ application.passport_photo.url }}" alt="Passport" class="img-thumbnail mb-3" style="width: 150px; height: 150px;">
-                {% endif %}
-                <table class="table table-bordered">
-                    <tr>
-                        <th width="30%">Full Name:</th>
-                        <td>{{ application.first_name }} {{ application.surname }} {{ application.other_names }}</td>
-                    </tr>
-                    <tr>
-                        <th>Date of Birth:</th>
-                        <td>{{ application.date_of_birth|date:"F d, Y" }}</td>
-                    </tr>
-                    <tr>
-                        <th>JAMB Number:</th>
-                        <td>{{ application.jamb_number }}</td>
-                    </tr>
-                    <tr>
-                        <th>JAMB Score:</th>
-                        <td>{{ application.jamb_score }}</td>
-                    </tr>
-                    <tr>
-                        <th>Phone:</th>
-                        <td>{{ application.phone }}</td>
-                    </tr>
-                    <tr>
-                        <th>Email:</th>
-                        <td>{{ application.email }}</td>
-                    </tr>
-                    <tr>
-                        <th>Address:</th>
-                        <td>{{ application.address }}</td>
-                    </tr>
-                    <tr>
-                        <th>LGA:</th>
-                        <td>{{ application.lga }}</td>
-                    </tr>
-                    <tr>
-                        <th>State of Origin:</th>
-                        <td>{{ application.state_of_origin }}</td>
-                    </tr>
-                </table>
+            <div class="card-body p-4 px-lg-5 pt-3">
+                <div class="row align-items-center mb-4">
+                    {% if application.passport_photo %}
+                    <div class="col-auto">
+                        <img src="{{ application.passport_photo.url }}" alt="Passport" class="rounded-3 shadow-sm border border-2 border-white" style="width: 120px; height: 120px; object-fit: cover;">
+                    </div>
+                    {% endif %}
+                    <div class="col">
+                        <h4 class="fw-bold mb-0 text-dark">{{ application.first_name }} {{ application.other_names }} <span class="text-primary text-uppercase">{{ application.surname }}</span></h4>
+                        <p class="text-muted d-flex align-items-center mt-2"><i class="fas fa-envelope me-2"></i> {{ application.email }}</p>
+                        <p class="text-muted d-flex align-items-center"><i class="fas fa-phone-alt me-2"></i> {{ application.phone }}</p>
+                    </div>
+                </div>
 
-                <h6 class="mt-4">Guardian/Next of Kin</h6>
-                <table class="table table-bordered">
-                    <tr>
-                        <th width="30%">Name:</th>
-                        <td>{{ application.guardian_name }}</td>
-                    </tr>
-                    <tr>
-                        <th>Phone:</th>
-                        <td>{{ application.guardian_phone }}</td>
-                    </tr>
-                    <tr>
-                        <th>Address:</th>
-                        <td>{{ application.guardian_address }}</td>
-                    </tr>
-                    <tr>
-                        <th>Relationship:</th>
-                        <td>{{ application.guardian_relationship }}</td>
-                    </tr>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-hover table-borderless bg-light rounded-4 border-0">
+                        <tbody>
+                            <tr><th class="ps-4 text-muted w-25">Date of Birth</th><td class="fw-medium text-dark">{{ application.date_of_birth|date:"F d, Y" }}</td></tr>
+                            <tr><th class="ps-4 text-muted">JAMB Number</th><td class="fw-medium text-dark"><span class="badge bg-primary bg-opacity-10 text-primary">{{ application.jamb_number }}</span></td></tr>
+                            <tr><th class="ps-4 text-muted">JAMB Score</th><td class="fw-medium text-dark"><span class="badge bg-success bg-opacity-10 text-success fs-6">{{ application.jamb_score }}</span></td></tr>
+                            <tr><th class="ps-4 text-muted">State of Origin</th><td class="fw-medium text-dark">{{ application.state_of_origin }}</td></tr>
+                            <tr><th class="ps-4 text-muted">LGA</th><td class="fw-medium text-dark">{{ application.lga }}</td></tr>
+                            <tr><th class="ps-4 text-muted">Home Address</th><td class="fw-medium text-dark pb-3">{{ application.address }}</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h6 class="fw-bold mt-4 mb-3 ps-2 text-dark"><i class="fas fa-users text-secondary me-2"></i> Guardian / Next of Kin</h6>
+                <div class="table-responsive">
+                    <table class="table table-hover table-borderless bg-light rounded-4 border-0">
+                        <tbody>
+                            <tr><th class="ps-4 text-muted w-25">Name</th><td class="fw-medium text-dark">{{ application.guardian_name }}</td></tr>
+                            <tr><th class="ps-4 text-muted">Relationship</th><td class="fw-medium text-dark">{{ application.guardian_relationship }}</td></tr>
+                            <tr><th class="ps-4 text-muted">Phone</th><td class="fw-medium text-dark">{{ application.guardian_phone }}</td></tr>
+                            <tr><th class="ps-4 text-muted">Address</th><td class="fw-medium text-dark pb-3">{{ application.guardian_address }}</td></tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
         {% if schools %}
-        <div class="card mb-4">
-            <div class="card-header">
-                <h5><i class="fas fa-school"></i> Schools Attended</h5>
+        <div class="card border-0 shadow-sm mb-4" style="border-radius: 20px;">
+            <div class="card-header bg-transparent border-bottom-0 pt-4 px-4 px-lg-5">
+                <h5 class="fw-bold text-dark mb-0"><i class="fas fa-school text-primary me-2"></i> Schools Attended</h5>
             </div>
-            <div class="card-body">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>School Name</th>
-                            <th>From</th>
-                            <th>To</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for school in schools %}
-                        <tr>
-                            <td>{{ school.school_name }}</td>
-                            <td>{{ school.from_year }}</td>
-                            <td>{{ school.to_year }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+            <div class="card-body p-4 px-lg-5 pt-3">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle border-light">
+                        <thead class="table-light text-muted small text-uppercase">
+                            <tr>
+                                <th class="ps-3 py-3 border-0 rounded-start">School Name</th>
+                                <th class="border-0">From</th>
+                                <th class="border-0 rounded-end">To</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for school in schools %}
+                            <tr>
+                                <td class="ps-3 fw-bold text-dark">{{ school.school_name }}</td>
+                                <td class="text-secondary">{{ school.from_year }}</td>
+                                <td class="text-secondary">{{ school.to_year }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
         {% endif %}
 
         {% if results %}
-        <div class="card mb-4">
-            <div class="card-header">
-                <h5><i class="fas fa-certificate"></i> SSCE Results</h5>
+        <div class="card border-0 shadow-sm mb-4" style="border-radius: 20px;">
+            <div class="card-header bg-transparent border-bottom-0 pt-4 px-4 px-lg-5">
+                <h5 class="fw-bold text-dark mb-0"><i class="fas fa-certificate text-primary me-2"></i> SSCE Results</h5>
             </div>
-            <div class="card-body">
-                {% for result in results %}
-                    <h6>{{ result.get_exam_type_display }} - {{ result.year }}</h6>
-                    <p><strong>Exam Number:</strong> {{ result.exam_number }}</p>
+            <div class="card-body p-4 px-lg-5 pt-3">
+                <div class="row">
+                    {% for result in results %}
+                    <div class="col-md-6 mb-4">
+                        <div class="bg-light p-4 rounded-4 h-100 border-0 shadow-sm">
+                            <h6 class="fw-bold text-primary mb-1">{{ result.get_exam_type_display }} - {{ result.year }}</h6>
+                            <p class="small text-muted mb-3 border-bottom pb-2">Exam Link: {{ result.exam_number }}</p>
 
-                    {% if not result.awaiting_result %}
-                    <table class="table table-sm table-bordered mb-4">
-                        <thead>
-                            <tr>
-                                <th>Subject</th>
-                                <th>Grade</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>English</td>
-                                <td>{{ result.english }}</td>
-                            </tr>
-                            <tr>
-                                <td>Mathematics</td>
-                                <td>{{ result.mathematics }}</td>
-                            </tr>
-                            <tr>
-                                <td>Biology</td>
-                                <td>{{ result.biology }}</td>
-                            </tr>
-                            <tr>
-                                <td>Chemistry</td>
-                                <td>{{ result.chemistry }}</td>
-                            </tr>
-                            <tr>
-                                <td>Physics</td>
-                                <td>{{ result.physics }}</td>
-                            </tr>
-                            {% if result.subject_6 %}
-                            <tr>
-                                <td>{{ result.subject_6 }}</td>
-                                <td>{{ result.grade_6 }}</td>
-                            </tr>
+                            {% if not result.awaiting_result %}
+                            <div class="table-responsive">
+                                <table class="table table-sm table-borderless mb-0">
+                                    <thead class="text-muted small">
+                                        <tr><th class="fw-normal">Subject</th><th class="fw-normal text-end">Grade</th></tr>
+                                    </thead>
+                                    <tbody class="fw-medium text-dark">
+                                        <tr><td>English</td><td class="text-end">{{ result.english }}</td></tr>
+                                        <tr><td>Mathematics</td><td class="text-end">{{ result.mathematics }}</td></tr>
+                                        <tr><td>Biology</td><td class="text-end">{{ result.biology }}</td></tr>
+                                        <tr><td>Chemistry</td><td class="text-end">{{ result.chemistry }}</td></tr>
+                                        <tr><td>Physics</td><td class="text-end">{{ result.physics }}</td></tr>
+                                        {% if result.subject_6 %}<tr><td>{{ result.subject_6 }}</td><td class="text-end">{{ result.grade_6 }}</td></tr>{% endif %}
+                                        {% if result.subject_7 %}<tr><td>{{ result.subject_7 }}</td><td class="text-end">{{ result.grade_7 }}</td></tr>{% endif %}
+                                        {% if result.subject_8 %}<tr><td>{{ result.subject_8 }}</td><td class="text-end">{{ result.grade_8 }}</td></tr>{% endif %}
+                                        {% if result.subject_9 %}<tr><td>{{ result.subject_9 }}</td><td class="text-end">{{ result.grade_9 }}</td></tr>{% endif %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            {% else %}
+                                <div class="alert alert-warning py-2 mb-0 d-flex align-items-center">
+                                    <i class="fas fa-history me-2"></i> <span class="fw-bold small">Awaiting Result</span>
+                                </div>
                             {% endif %}
-                            {% if result.subject_7 %}
-                            <tr>
-                                <td>{{ result.subject_7 }}</td>
-                                <td>{{ result.grade_7 }}</td>
-                            </tr>
-                            {% endif %}
-                            {% if result.subject_8 %}
-                            <tr>
-                                <td>{{ result.subject_8 }}</td>
-                                <td>{{ result.grade_8 }}</td>
-                            </tr>
-                            {% endif %}
-                            {% if result.subject_9 %}
-                            <tr>
-                                <td>{{ result.subject_9 }}</td>
-                                <td>{{ result.grade_9 }}</td>
-                            </tr>
-                            {% endif %}
-                        </tbody>
-                    </table>
-                    {% else %}
-                        <p class="text-warning"><i class="fas fa-clock"></i> Awaiting Result</p>
-                    {% endif %}
-                {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
         {% endif %}
 
-        <div class="card mb-4">
-            <div class="card-header">
-                <h5><i class="fas fa-book"></i> Course Selection</h5>
+        <div class="card border-0 shadow-sm mb-4" style="border-radius: 20px;">
+            <div class="card-header bg-transparent border-bottom-0 pt-4 px-4 px-lg-5">
+                <h5 class="fw-bold text-dark mb-0"><i class="fas fa-book text-primary me-2"></i> Course Selection</h5>
             </div>
-            <div class="card-body">
-                <table class="table table-bordered">
-                    <tr>
-                        <th width="30%">First Choice:</th>
-                        <td>{{ application.get_first_choice_display }}</td>
-                    </tr>
-                    <tr>
-                        <th>Second Choice:</th>
-                        <td>{{ application.get_second_choice_display }}</td>
-                    </tr>
-                </table>
+            <div class="card-body p-4 px-lg-5 pt-3">
+                <div class="d-flex align-items-center bg-primary bg-opacity-10 rounded-4 p-3 mb-3">
+                    <span class="badge bg-primary rounded-pill me-3 px-3 py-2">Choice 1</span>
+                    <strong class="text-primary">{{ application.get_first_choice_display }}</strong>
+                </div>
+                <div class="d-flex align-items-center bg-secondary bg-opacity-10 rounded-4 p-3">
+                    <span class="badge bg-secondary rounded-pill me-3 px-3 py-2">Choice 2</span>
+                    <strong class="text-secondary">{{ application.get_second_choice_display }}</strong>
+                </div>
             </div>
         </div>
 
         {% if documents %}
-        <div class="card mb-4">
-            <div class="card-header">
-                <h5><i class="fas fa-file-upload"></i> Uploaded Documents</h5>
+        <div class="card border-0 shadow-sm mb-5" style="border-radius: 20px;">
+            <div class="card-header bg-transparent border-bottom-0 pt-4 px-4 px-lg-5">
+                <h5 class="fw-bold text-dark mb-0"><i class="fas fa-file-upload text-primary me-2"></i> Submitted Files</h5>
             </div>
-            <div class="card-body">
-                <ul class="list-group">
+            <div class="card-body p-4 px-lg-5 pt-3">
+                <div class="row">
                     {% for doc in documents %}
-                    <li class="list-group-item">
-                        <i class="fas fa-file"></i> {{ doc.get_document_type_display }}
-                        <a href="{{ doc.document_file.url }}" target="_blank" class="btn btn-sm btn-outline-primary float-right">
-                            <i class="fas fa-download"></i> Download
-                        </a>
-                    </li>
+                    <div class="col-md-6 mb-3">
+                        <div class="d-flex align-items-center justify-content-between border rounded-3 p-3 bg-light">
+                            <div class="text-truncate me-3">
+                                <i class="fas fa-file-pdf text-danger fs-4 me-2 align-middle"></i>
+                                <span class="fw-medium text-dark">{{ doc.get_document_type_display }}</span>
+                            </div>
+                            <a href="{{ doc.document_file.url }}" target="_blank" class="btn btn-sm btn-outline-primary rounded-pill px-3 shadow-none">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
                     {% endfor %}
-                </ul>
+                </div>
             </div>
         </div>
         {% endif %}
 
-        <div class="text-center mb-5">
-            <a href="{% url 'download_pdf' %}" class="btn btn-success btn-lg mr-2">
-                <i class="fas fa-download"></i> Download PDF
+        <div class="d-flex flex-column flex-md-row justify-content-center gap-3">
+            <a href="{% url 'download_pdf' %}" class="btn btn-success px-5 py-3 rounded-pill fw-bold shadow-lg hover-lift">
+                <i class="fas fa-file-pdf me-2"></i> Download Digital PDF
             </a>
-            <a href="{% url 'dashboard' %}" class="btn btn-primary btn-lg">
-                <i class="fas fa-home"></i> Back to Dashboard
+            <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary px-5 py-3 rounded-pill fw-bold hover-lift">
+                <i class="fas fa-home me-2"></i> Client Dashboard
             </a>
         </div>
     </div>

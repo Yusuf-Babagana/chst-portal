@@ -3,76 +3,97 @@
 {% block title %}Welcome - CHSTH Admission Portal{% endblock %}
 
 {% block content %}
-<div class="row mt-5">
-    <div class="col-md-8 offset-md-2">
-        <div class="text-center mb-5">
-            <h1 class="display-4 text-primary">
-                <i class="fas fa-graduation-cap"></i> Welcome to CHSTH
-            </h1>
-            <p class="lead">College of Health Sciences and Technology Hadejia</p>
-            <hr class="my-4">
+<div class="row align-items-center py-5">
+    <div class="col-lg-6 mb-5 mb-lg-0 pe-lg-5 text-center text-lg-start">
+        <span class="badge bg-primary text-primary bg-opacity-10 rounded-pill px-3 py-2 mb-3 fw-semibold">
+            Admissions Now Open <i class="fas fa-bullhorn ms-1"></i>
+        </span>
+        <h1 class="display-4 fw-extrabold text-dark mb-4" style="font-weight: 800; letter-spacing: -1px;">
+            Secure Your Future at <span class="text-primary">CHSTH</span>
+        </h1>
+        <p class="lead text-muted mb-5 pe-lg-4" style="line-height: 1.8;">
+            Apply seamlessly into the College of Health Sciences and Technology Hadejia. Our modernized portal makes the application process faster, simpler, and entirely digitial.
+        </p>
+
+        <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center justify-content-lg-start">
+            <a href="{% url 'signup' %}" class="btn btn-primary btn-lg px-4 py-3 rounded-pill shadow-sm">
+                <i class="fas fa-rocket me-2"></i> Start Application
+            </a>
+            <a href="{% url 'login' %}" class="btn btn-outline-secondary btn-lg px-4 py-3 rounded-pill">
+                <i class="fas fa-sign-in-alt me-2"></i> Resume Application
+            </a>
         </div>
-
-        <div class="card">
-            <div class="card-body text-center p-5">
-                <h3 class="mb-4">Online Admission Application Portal</h3>
-                <p class="mb-4">
-                    Apply for admission into any of our prestigious health science programs.
-                    The application process is simple, secure, and mobile-friendly.
-                </p>
-
-                <div class="row mt-5">
-                    <div class="col-md-6 mb-3">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <i class="fas fa-user-plus fa-3x text-primary mb-3"></i>
-                                <h5>New Applicant?</h5>
-                                <p>Create an account to start your application</p>
-                                <a href="{% url 'signup' %}" class="btn btn-primary btn-block">
-                                    Sign Up Now
-                                </a>
-                            </div>
-                        </div>
+    </div>
+    
+    <div class="col-lg-6 position-relative">
+        <div class="card border-0 shadow-lg" style="border-radius: 24px; background: linear-gradient(145deg, #ffffff, #f8f9fa);">
+            <div class="card-body p-5">
+                <h4 class="fw-bold mb-4 d-flex align-items-center">
+                    <div class="bg-success text-white rounded p-2 me-3 shadow-sm d-inline-flex">
+                        <i class="fas fa-book-medical"></i>
                     </div>
-                    <div class="col-md-6 mb-3">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <i class="fas fa-sign-in-alt fa-3x text-success mb-3"></i>
-                                <h5>Returning Applicant?</h5>
-                                <p>Continue your application process</p>
-                                <a href="{% url 'login' %}" class="btn btn-success btn-block">
-                                    Login
-                                </a>
-                            </div>
-                        </div>
+                    Available Program
+                </h4>
+                
+                <div class="p-4 bg-light rounded-4 border border-light shadow-sm mb-4">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-check-circle text-success fs-4 me-3"></i>
+                        <h5 class="mb-0 fw-bold text-dark">National Diploma in Community Health (ND CHEW)</h5>
                     </div>
                 </div>
+
+                <div class="d-flex align-items-center bg-primary bg-opacity-10 text-primary p-4 rounded-4 mt-4">
+                    <i class="fas fa-money-check-alt fs-2 me-4"></i>
+                    <div>
+                        <h6 class="fw-bold mb-1 text-uppercase tracking-wider" style="letter-spacing: 1px;">Application Fee</h6>
+                        <h3 class="mb-0 fw-bold text-dark">₦12,550</h3>
+                    </div>
+                </div>
+                
+                <p class="text-muted small mt-4 mb-0 text-center">
+                    <i class="fas fa-shield-alt me-1 text-success"></i> Highly secure, robust Paystack integration. Payments can also be waived using authorized referral codes.
+                </p>
             </div>
         </div>
+        
+        <!-- Decorative blobs -->
+        <div class="position-absolute top-0 end-0 translate-middle bg-primary bg-opacity-20 rounded-circle" style="width: 150px; height: 150px; filter: blur(40px); z-index: -1;"></div>
+        <div class="position-absolute bottom-0 start-0 translate-middle bg-success bg-opacity-20 rounded-circle" style="width: 120px; height: 120px; filter: blur(30px); z-index: -1;"></div>
+    </div>
+</div>
 
-        <div class="card mt-4">
-            <div class="card-header">
-                <i class="fas fa-info-circle"></i> Available Programs
-            </div>
+<div class="row mt-5 pt-4 text-center">
+    <div class="col-12 mb-4">
+        <h6 class="text-uppercase fw-bold text-primary tracking-widest">How It Works</h6>
+        <h2 class="fw-bold">Three Simple Steps</h2>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 border-0 bg-transparent shadow-none hover-none">
             <div class="card-body">
-                <ul class="list-unstyled">
-                    <li class="mb-2"><i class="fas fa-check text-success"></i> National Diploma in Community Health (ND CHEW)</li>
-                </ul>
+                <div class="bg-white shadow-sm text-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px; font-size: 1.5rem;">1</div>
+                <h5 class="fw-bold">Create Account</h5>
+                <p class="text-muted">Register an account securely. Your data is encrypted and saved across sessions.</p>
             </div>
         </div>
-
-        <div class="card mt-4">
-            <div class="card-header">
-                <i class="fas fa-money-bill-wave"></i> Application Fee
-            </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 border-0 bg-transparent shadow-none hover-none">
             <div class="card-body">
-                <p class="mb-2">
-                    <strong>Application Fee:</strong> ₦12,550
-                </p>
-                <p class="text-muted small">
-                    <i class="fas fa-info-circle"></i>
-                    Payment can be waived with a valid referral code.
-                </p>
+                <div class="bg-white shadow-sm text-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px; font-size: 1.5rem;">2</div>
+                <h5 class="fw-bold">Pay Application Fee</h5>
+                <p class="text-muted">Pay the ₦12,550 fee or provide a valid waiver. Instant processing via Paystack.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 border-0 bg-transparent shadow-none hover-none">
+            <div class="card-body">
+                <div class="bg-white shadow-sm text-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px; font-size: 1.5rem;">3</div>
+                <h5 class="fw-bold">Complete Forms</h5>
+                <p class="text-muted">Fill out 5 simple form stages. Track your progress with our step-by-step indicator.</p>
             </div>
         </div>
     </div>

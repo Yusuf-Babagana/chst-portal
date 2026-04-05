@@ -1,0 +1,31 @@
+<div class="stepper-wrapper">
+    <!-- Step 1: Personal -->
+    <div class="stepper-item {% if current_step >= 1 %}active{% endif %} {% if application.section_a_completed and current_step > 1 %}completed{% endif %}">
+        <div class="step-counter"><i class="fas fa-user"></i></div>
+        <div class="step-name d-none d-sm-block">Personal</div>
+    </div>
+    
+    <!-- Step 2: Schools -->
+    <div class="stepper-item {% if current_step >= 2 %}active{% endif %} {% if application.section_b_completed and current_step > 2 %}completed{% endif %}">
+        <div class="step-counter"><i class="fas fa-school"></i></div>
+        <div class="step-name d-none d-sm-block">Schools</div>
+    </div>
+    
+    <!-- Step 3: SSCE Results -->
+    <div class="stepper-item {% if current_step >= 3 %}active{% endif %} {% if application.section_c_completed and current_step > 3 %}completed{% endif %}">
+        <div class="step-counter"><i class="fas fa-certificate"></i></div>
+        <div class="step-name d-none d-sm-block">SSCE</div>
+    </div>
+    
+    <!-- Step 4: Course Selection -->
+    <div class="stepper-item {% if current_step >= 4 %}active{% endif %} {% if application.section_d_completed and current_step > 4 %}completed{% endif %}">
+        <div class="step-counter"><i class="fas fa-book"></i></div>
+        <div class="step-name d-none d-sm-block">Course</div>
+    </div>
+    
+    <!-- Step 5: Declaration & Upload -->
+    <div class="stepper-item {% if current_step >= 5 %}active{% endif %} {% if application.section_e_completed %}completed{% endif %}">
+        <div class="step-counter"><i class="fas fa-signature"></i></div>
+        <div class="step-name d-none d-sm-block">Declaration</div>
+    </div>
+</div>
