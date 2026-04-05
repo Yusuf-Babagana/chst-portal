@@ -4,26 +4,34 @@
 {% block title %}Section D - Course Selection{% endblock %}
 
 {% block content %}
-<div class="row mt-4">
-    <div class="col-md-8 offset-md-2">
-        <div class="card">
-            <div class="card-header">
-                <h4><i class="fas fa-book"></i> Section D: Course Selection</h4>
+<div class="row justify-content-center pt-3 pb-5">
+    <div class="col-lg-10 col-xl-9">
+        {% include "portal/partials/stepper.html" with current_step=4 %}
+        
+        <div class="card border-0 shadow-lg mt-4" style="border-radius: 20px;">
+            <div class="card-header bg-transparent border-bottom-0 pt-5 pb-0 px-4 px-md-5">
+                <div class="d-flex align-items-center">
+                    <div class="bg-primary text-white bg-opacity-10 text-primary rounded p-3 me-3 shadow-sm">
+                        <i class="fas fa-book fs-4 text-primary"></i>
+                    </div>
+                    <div>
+                        <h3 class="fw-bold mb-0 text-dark">Course Selection</h3>
+                        <p class="text-muted mt-1 mb-0">Select your preferred academic pathway.</p>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                <p class="text-muted">Select your first and second choice programs</p>
-
+            <div class="card-body p-4 p-md-5 pt-4">
                 <form method="post" novalidate>
                     {% csrf_token %}
                     {{ form|crispy }}
 
-                    <div class="mt-4">
-                        <button type="submit" class="btn btn-primary btn-lg">
-                            <i class="fas fa-save"></i> Save and Continue
-                        </button>
-                        <a href="{% url 'dashboard' %}" class="btn btn-secondary btn-lg">
-                            <i class="fas fa-arrow-left"></i> Back to Dashboard
+                    <div class="d-flex justify-content-between align-items-center mt-5 pt-4 border-top">
+                        <a href="{% url 'dashboard' %}" class="btn btn-light px-4 text-secondary fw-bold rounded-pill">
+                            <i class="fas fa-arrow-left me-2"></i> Dashboard
                         </a>
+                        <button type="submit" class="btn btn-primary px-5 py-2 fw-bold text-white rounded-pill shadow-sm">
+                            Save &amp; Continue <i class="fas fa-arrow-right ms-2"></i>
+                        </button>
                     </div>
                 </form>
             </div>

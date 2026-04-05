@@ -6,171 +6,348 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}CHSTH Admission Portal{% endblock %}</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
 
     <style>
         :root {
-            --primary-color: #1a5490;
-            --secondary-color: #2c7abf;
-            --success-color: #28a745;
-            --danger-color: #dc3545;
+            --primary-color: #0f172a;     /* Slate 900 */
+            --primary-light: #1e293b;     /* Slate 800 */
+            --accent-color: #3b82f6;      /* Blue 500 */
+            --accent-hover: #2563eb;      /* Blue 600 */
+            --success-color: #10b981;     /* Emerald 500 */
+            --bg-color: #f8fafc;          /* Slate 50 */
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --text-main: #334155;         /* Slate 700 */
+            --text-heading: #0f172a;      /* Slate 900 */
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f5f7fa;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(217,100%,92%,1) 0, transparent 50%), 
+                radial-gradient(at 100% 100%, hsla(204,100%,94%,1) 0, transparent 50%);
+            background-attachment: fixed;
         }
 
+        /* Glassmorphism Navbar */
         .navbar {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background-color: rgba(255, 255, 255, 0.85) !important;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+            padding: 1rem 0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
         }
 
         .navbar-brand {
-            font-weight: bold;
-            color: white !important;
-            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--primary-color) !important;
+            font-size: 1.4rem;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .navbar-brand i {
+            color: var(--accent-color);
+            background: rgba(59, 130, 246, 0.1);
+            padding: 8px;
+            border-radius: 8px;
         }
 
         .navbar-nav .nav-link {
-            color: rgba(255,255,255,0.9) !important;
-            margin: 0 10px;
-            transition: all 0.3s;
+            color: var(--text-main) !important;
+            font-weight: 500;
+            margin: 0 8px;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
         }
 
-        .navbar-nav .nav-link:hover {
-            color: white !important;
-            transform: translateY(-2px);
+        .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active {
+            color: var(--accent-color) !important;
+            background-color: rgba(59, 130, 246, 0.05);
         }
 
+        /* Beautiful Cards */
         .card {
-            border: none;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-            transition: transform 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 20px;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.025);
+            margin-bottom: 2rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
         }
 
         .card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+            border-color: rgba(255,255,255, 0.8);
         }
 
         .card-header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            border-radius: 10px 10px 0 0 !important;
-            padding: 15px 20px;
+            background: transparent;
+            color: var(--text-heading);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+            padding: 1.5rem 2rem;
+            font-weight: 700;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+
+        /* Buttons */
+        .btn {
             font-weight: 600;
+            border-radius: 12px;
+            padding: 0.75rem 1.5rem;
+            transition: all 0.3s ease;
+            letter-spacing: 0.3px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background-color: var(--accent-color);
             border: none;
-            padding: 10px 30px;
-            border-radius: 5px;
-            transition: all 0.3s;
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3);
         }
 
         .btn-primary:hover {
+            background-color: var(--accent-hover);
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        }
-
-        .alert {
-            border-radius: 8px;
-            border: none;
-        }
-
-        .form-control {
-            border-radius: 5px;
-            border: 1px solid #ddd;
-            padding: 10px;
-        }
-
-        .form-control:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 0.2rem rgba(26, 84, 144, 0.25);
-        }
-
-        .footer {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4);
             color: white;
-            padding: 20px 0;
-            margin-top: 50px;
+        }
+        
+        .btn-success {
+            background-color: var(--success-color);
+            border: none;
+            box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.3);
+        }
+        
+        .btn-success:hover {
+            background-color: #059669; /* Emerald 600 */
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.4);
         }
 
-        .progress-section {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        /* Form styling */
+        .form-control, .form-select {
+            border-radius: 12px;
+            border: 1px solid #cbd5e1;
+            padding: 0.75rem 1rem;
+            font-size: 0.95rem;
+            background-color: #ffffff;
+            transition: all 0.2s ease;
         }
 
-        .section-step {
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 8px;
-            background: #f8f9fa;
-            border-left: 4px solid var(--primary-color);
-            transition: all 0.3s;
+        .form-control:focus, .form-select:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+            background-color: #fff;
         }
 
-        .section-step:hover {
-            background: #e9ecef;
-            transform: translateX(5px);
+        label {
+            font-weight: 600;
+            color: var(--text-heading);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
         }
 
-        .section-step.completed {
-            border-left-color: var(--success-color);
-            background: #d4edda;
+        /* Alerts */
+        .alert {
+            border-radius: 16px;
+            border: none;
+            font-weight: 500;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
-        .section-step i {
-            margin-right: 10px;
-            font-size: 1.2rem;
+        /* Progress Stepper globally defined for sections */
+        .stepper-wrapper {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .stepper-wrapper::before {
+            content: '';
+            position: absolute;
+            background: #e2e8f0;
+            height: 4px;
+            width: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 0;
+            z-index: 0;
+            border-radius: 4px;
+        }
+
+        .stepper-item {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            z-index: 1;
+        }
+
+        .stepper-item::before {
+            position: absolute;
+            content: "";
+            background: var(--accent-color);
+            height: 4px;
+            width: 0%;
+            top: 50%;
+            left: -50%;
+            transform: translateY(-50%);
+            z-index: -1;
+            transition: 0.4s ease;
+        }
+
+        .stepper-item:first-child::before {
+            content: none;
+        }
+
+        .stepper-item.completed::before, .stepper-item.active::before {
+            width: 100%;
+        }
+        
+        .step-counter {
+            position: relative;
+            z-index: 5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #e2e8f0;
+            color: #64748b;
+            font-weight: bold;
+            border: 4px solid var(--bg-color);
+            transition: all 0.3s ease;
+        }
+
+        .stepper-item.completed .step-counter {
+            background-color: var(--success-color);
+            color: white;
+        }
+        
+        .stepper-item.active .step-counter {
+            background-color: var(--accent-color);
+            color: white;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+        }
+
+        .step-name {
+            margin-top: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #64748b;
+            text-align: center;
+        }
+
+        .stepper-item.active .step-name {
+            color: var(--accent-color);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--primary-color);
+            color: #f1f5f9;
+            padding: 2rem 0;
+            margin-top: auto;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+        }
+
+        /* Micro animation utility */
+        .fade-in-up {
+            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 
     {% block extra_css %}{% endblock %}
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
+    <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container">
             <a class="navbar-brand" href="{% url 'home' %}">
-                <i class="fas fa-graduation-cap"></i> CHSTH Admission Portal
+                <i class="fas fa-graduation-cap"></i> CHSTH Portal
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
+                <ul class="navbar-nav ms-auto align-items-center">
                     {% if user.is_authenticated %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'dashboard' %}">
-                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                                <i class="fas fa-grid-2"></i> Dashboard
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <span class="nav-link">
-                                <i class="fas fa-user"></i> {{ user.get_full_name }}
+                        <li class="nav-item mx-lg-2">
+                            <span class="nav-link fw-semibold" style="color: var(--primary-color) !important;">
+                                <i class="fas fa-user-circle me-1"></i> {{ user.get_full_name }}
                             </span>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'logout' %}">
+                            <a class="nav-link btn btn-outline-danger btn-sm text-danger ms-lg-2 px-3 fw-bold" style="border-radius: 20px;" href="{% url 'logout' %}">
                                 <i class="fas fa-sign-out-alt"></i> Logout
                             </a>
                         </li>
                     {% else %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'login' %}">
-                                <i class="fas fa-sign-in-alt"></i> Login
+                                Login
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'signup' %}">
-                                <i class="fas fa-user-plus"></i> Sign Up
+                        <li class="nav-item ms-lg-2">
+                            <a class="btn btn-primary px-4 shadow-sm" href="{% url 'signup' %}">
+                                Sign Up
                             </a>
                         </li>
                     {% endif %}
@@ -179,14 +356,14 @@
         </div>
     </nav>
 
-    <div class="container mt-4">
+    <div class="container mt-5 flex-grow-1 fade-in-up">
         {% if messages %}
             {% for message in messages %}
-                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-                    {{ message }}
-                    <button type="button" class="close" data-dismiss="alert">
-                        <span>&times;</span>
-                    </button>
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show shadow-sm" role="alert">
+                    {% if message.tags == 'success' %}<i class="fas fa-check-circle text-success fs-5"></i>{% endif %}
+                    {% if message.tags == 'error' or message.tags == 'danger' %}<i class="fas fa-exclamation-circle text-danger fs-5"></i>{% endif %}
+                    <div>{{ message }}</div>
+                    <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             {% endfor %}
         {% endif %}
@@ -194,14 +371,16 @@
         {% block content %}{% endblock %}
     </div>
 
-    <footer class="footer text-center">
+    <footer class="footer text-center w-100">
         <div class="container">
-            <p class="mb-0">&copy; 2025 College of Health Sciences and Technology Hadejia. All rights reserved.</p>
+            <h5 class="fw-bold mb-3"><i class="fas fa-clinic-medical me-2"></i>CHST Hadejia</h5>
+            <p class="mb-0 text-white-50">&copy; 2025 College of Health Sciences and Technology Hadejia. All rights reserved.</p>
         </div>
     </footer>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap 5 Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
     {% block extra_js %}{% endblock %}
 </body>

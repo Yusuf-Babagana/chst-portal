@@ -3,129 +3,79 @@
 {% block title %}Dashboard - CHSTH Admission Portal{% endblock %}
 
 {% block content %}
-<div class="row mt-4">
-    <div class="col-md-12">
-        <h2 class="mb-4">
-            <i class="fas fa-tachometer-alt"></i> Application Dashboard
-        </h2>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold mb-0">
+        <i class="fas fa-grid-2 text-primary me-2"></i> Application Hub
+    </h2>
+</div>
 
-        <div class="card mb-4">
-            <div class="card-body">
-                <h5>Welcome, {{ user.get_full_name }}!</h5>
-                {% if application.application_number %}
-                    <p class="mb-0">
-                        <strong>Application Number:</strong> {{ application.application_number }}
-                    </p>
-                {% endif %}
-                <p class="mb-0">
-                    <strong>Status:</strong>
-                    <span class="badge badge-{{ application.status|yesno:'success,warning,info,danger' }}">
-                        {{ application.get_status_display }}
+<div class="row mb-5">
+    <!-- Welcome Card -->
+    <div class="col-lg-8 mb-4 mb-lg-0">
+        <div class="card h-100 border-0 shadow-sm" style="background: linear-gradient(to right, #ffffff, #f1f5f9);">
+            <div class="card-body p-4 d-flex align-items-center">
+                <div class="bg-primary text-white rounded-circle d-flex justify-content-center align-items-center me-4 shadow" style="width: 70px; height: 70px; font-size: 1.8rem; font-weight: bold;">
+                    {{ user.first_name|make_list|first }}{{ user.last_name|make_list|first }}
+                </div>
+                <div>
+                    <h4 class="fw-bold mb-1">Welcome back, {{ user.get_full_name }}!</h4>
+                    <p class="text-muted mb-0">Continue building your future with CHSTH.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Status Card -->
+    <div class="col-lg-4">
+        <div class="card h-100 border-0 shadow-sm bg-white">
+            <div class="card-body p-4 d-flex flex-column justify-content-center">
+                <p class="text-muted fw-semibold text-uppercase tracking-wider mb-1" style="font-size: 0.8rem;">Current Status</p>
+                <div class="d-flex align-items-center justify-content-between">
+                    <span class="badge rounded-pill bg-{{ application.status|yesno:'success,warning,info,primary' }} px-3 py-2 fs-6 shadow-sm">
+                        {{ application.get_status_display|default:"In Progress" }}
                     </span>
-                </p>
-            </div>
-        </div>
-
-        <div class="progress-section">
-            <h5 class="mb-3"><i class="fas fa-tasks"></i> Application Progress</h5>
-
-            <div class="section-step {% if application.section_a_completed %}completed{% endif %}">
-                <i class="fas fa-{% if application.section_a_completed %}check-circle text-success{% else %}circle text-muted{% endif %}"></i>
-                <strong>Section A: Personal Information</strong>
-                <div class="float-right">
-                    {% if application.section_a_completed %}
-                        <a href="{% url 'section_a' %}" class="btn btn-sm btn-outline-primary">
-                            <i class="fas fa-edit"></i> Edit
-                        </a>
-                    {% else %}
-                        <a href="{% url 'section_a' %}" class="btn btn-sm btn-primary">
-                            <i class="fas fa-arrow-right"></i> Start
-                        </a>
-                    {% endif %}
-                </div>
-            </div>
-
-            <div class="section-step {% if application.section_b_completed %}completed{% endif %}">
-                <i class="fas fa-{% if application.section_b_completed %}check-circle text-success{% else %}circle text-muted{% endif %}"></i>
-                <strong>Section B: Schools Attended</strong>
-                <div class="float-right">
-                    {% if application.section_b_completed %}
-                        <a href="{% url 'section_b' %}" class="btn btn-sm btn-outline-primary">
-                            <i class="fas fa-edit"></i> Edit
-                        </a>
-                    {% else %}
-                        <a href="{% url 'section_b' %}" class="btn btn-sm btn-primary">
-                            <i class="fas fa-arrow-right"></i> Start
-                        </a>
-                    {% endif %}
-                </div>
-            </div>
-
-            <div class="section-step {% if application.section_c_completed %}completed{% endif %}">
-                <i class="fas fa-{% if application.section_c_completed %}check-circle text-success{% else %}circle text-muted{% endif %}"></i>
-                <strong>Section C: SSCE Results</strong>
-                <div class="float-right">
-                    {% if application.section_c_completed %}
-                        <a href="{% url 'section_c' %}" class="btn btn-sm btn-outline-primary">
-                            <i class="fas fa-edit"></i> Edit
-                        </a>
-                    {% else %}
-                        <a href="{% url 'section_c' %}" class="btn btn-sm btn-primary">
-                            <i class="fas fa-arrow-right"></i> Start
-                        </a>
-                    {% endif %}
-                </div>
-            </div>
-
-            <div class="section-step {% if application.section_d_completed %}completed{% endif %}">
-                <i class="fas fa-{% if application.section_d_completed %}check-circle text-success{% else %}circle text-muted{% endif %}"></i>
-                <strong>Section D: Course Selection</strong>
-                <div class="float-right">
-                    {% if application.section_d_completed %}
-                        <a href="{% url 'section_d' %}" class="btn btn-sm btn-outline-primary">
-                            <i class="fas fa-edit"></i> Edit
-                        </a>
-                    {% else %}
-                        <a href="{% url 'section_d' %}" class="btn btn-sm btn-primary">
-                            <i class="fas fa-arrow-right"></i> Start
-                        </a>
-                    {% endif %}
-                </div>
-            </div>
-
-            <div class="section-step {% if application.section_e_completed %}completed{% endif %}">
-                <i class="fas fa-{% if application.section_e_completed %}check-circle text-success{% else %}circle text-muted{% endif %}"></i>
-                <strong>Section E: Declaration & Documents</strong>
-                <div class="float-right">
-                    {% if application.section_e_completed %}
-                        <a href="{% url 'section_e' %}" class="btn btn-sm btn-outline-primary">
-                            <i class="fas fa-edit"></i> Edit
-                        </a>
-                    {% else %}
-                        <a href="{% url 'section_e' %}" class="btn btn-sm btn-primary">
-                            <i class="fas fa-arrow-right"></i> Start
-                        </a>
+                    {% if application.application_number %}
+                        <div class="text-end">
+                            <small class="text-muted d-block">App. Number</small>
+                            <strong class="text-dark">{{ application.application_number }}</strong>
+                        </div>
                     {% endif %}
                 </div>
             </div>
         </div>
-
-        {% if application.status == 'submitted' %}
-            <div class="card mt-4">
-                <div class="card-body text-center">
-                    <h5 class="text-success">
-                        <i class="fas fa-check-circle"></i> Application Submitted Successfully!
-                    </h5>
-                    <p>You can view or download your application form below.</p>
-                    <a href="{% url 'application_summary' %}" class="btn btn-primary mr-2">
-                        <i class="fas fa-eye"></i> View Application
-                    </a>
-                    <a href="{% url 'download_pdf' %}" class="btn btn-success">
-                        <i class="fas fa-download"></i> Download PDF
-                    </a>
-                </div>
-            </div>
-        {% endif %}
     </div>
 </div>
+
+{% if application.status == 'submitted' %}
+<!-- Completion Success -->
+<div class="card border-0 mb-5 bg-success bg-opacity-10">
+    <div class="card-body p-5 text-center">
+        <div class="bg-white rounded-circle d-inline-flex justify-content-center align-items-center mb-3 shadow-sm" style="width: 80px; height: 80px;">
+            <i class="fas fa-check-circle text-success" style="font-size: 3rem;"></i>
+        </div>
+        <h3 class="fw-bold text-success mb-3">Application Safely Received!</h3>
+        <p class="lead text-muted mb-4">Your application has been submitted and is currently locked for review.</p>
+        <div class="d-flex justify-content-center gap-3">
+            <a href="{% url 'application_summary' %}" class="btn btn-primary px-4 py-2">
+                <i class="fas fa-eye me-2"></i> Review Form
+            </a>
+            <a href="{% url 'download_pdf' %}" class="btn btn-outline-success px-4 py-2">
+                <i class="fas fa-file-pdf me-2"></i> Download Document
+            </a>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<h4 class="fw-bold mb-4">Application Progress</h4>
+
+<div class="row">
+    <!-- Section Cards -->
+    {% include "portal/partials/step_card.html" with title="Personal Information" icon="user" status=application.section_a_completed url="section_a" %}
+    {% include "portal/partials/step_card.html" with title="Schools Attended" icon="school" status=application.section_b_completed url="section_b" %}
+    {% include "portal/partials/step_card.html" with title="SSCE Results" icon="certificate" status=application.section_c_completed url="section_c" %}
+    {% include "portal/partials/step_card.html" with title="Course Selection" icon="book" status=application.section_d_completed url="section_d" %}
+    {% include "portal/partials/step_card.html" with title="Declaration" icon="signature" status=application.section_e_completed url="section_e" %}
+</div>
+
 {% endblock %}

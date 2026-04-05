@@ -4,44 +4,40 @@
 {% block title %}Referral Code - CHSTH Admission Portal{% endblock %}
 
 {% block content %}
-<div class="row mt-4">
-    <div class="col-md-8 offset-md-2">
-        <div class="card">
-            <div class="card-header text-center">
-                <h4><i class="fas fa-ticket-alt"></i> Referral Code or Payment</h4>
-            </div>
-            <div class="card-body">
-                <div class="alert alert-info">
-                    <h5><i class="fas fa-info-circle"></i> Two Ways to Proceed:</h5>
-                    <ol>
-                        <li>Enter a valid referral code below to skip payment</li>
-                        <li>Click "Proceed to Payment" to pay ₦12,550 application fee</li>
-                    </ol>
+<div class="row justify-content-center align-items-center mb-5" style="min-height: 60vh;">
+    <div class="col-md-10 col-lg-8 col-xl-7 mt-4">
+        <div class="card border-0 shadow-lg text-center" style="border-radius: 20px;">
+            <div class="card-header bg-transparent border-bottom-0 pt-5 pb-0">
+                <div class="bg-info text-white bg-opacity-10 text-info rounded d-inline-flex justify-content-center align-items-center mb-3 shadow-sm p-3">
+                    <i class="fas fa-ticket-alt fs-3"></i>
                 </div>
-
-                <form method="post">
+                <h3 class="fw-bold text-dark">Referral Code or Direct Payment</h3>
+                <p class="text-muted">You can waive your application fee using a valid internal referral code.</p>
+            </div>
+            <div class="card-body p-4 p-md-5 pt-3">
+                <form method="post" class="text-start">
                     {% csrf_token %}
-                    <div class="form-group">
-                        <label for="id_code">
-                            <i class="fas fa-ticket-alt"></i> Referral Code (Optional)
+                    
+                    <div class="bg-light border-0 shadow-sm rounded-4 p-4 mb-4">
+                        <label for="id_code" class="fw-bold text-dark mb-2">
+                            <i class="fas fa-hashtag me-2 text-primary"></i> Referral Code (Optional)
                         </label>
                         {{ form.code }}
-                        <small class="form-text text-muted">
-                            If you have a referral code, enter it above and click "Apply Code"
+                        <small class="form-text text-muted mt-2">
+                            If you have a referral code, enter it above and click "Apply Code".
                         </small>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-6 mb-2">
-                            <button type="submit" class="btn btn-success btn-block">
-                                <i class="fas fa-check"></i> Apply Code
-                            </button>
-                        </div>
-                        <div class="col-md-6 mb-2">
-                            <a href="{% url 'payment' %}" class="btn btn-primary btn-block">
-                                <i class="fas fa-credit-card"></i> Proceed to Payment
-                            </a>
-                        </div>
+                    <div class="d-flex flex-column flex-md-row gap-3 mt-4">
+                        <button type="submit" class="btn btn-success flex-grow-1 py-3 fw-bold rounded-pill shadow-sm hover-lift">
+                            <i class="fas fa-check me-2"></i> Apply Code
+                        </button>
+                        
+                        <div class="d-flex align-items-center justify-content-center px-2 text-muted fw-bold">OR</div>
+                        
+                        <a href="{% url 'payment' %}" class="btn btn-primary flex-grow-1 py-3 fw-bold rounded-pill shadow-sm hover-lift">
+                            <i class="fas fa-credit-card me-2"></i> Proceed to Pay ₦12,550
+                        </a>
                     </div>
                 </form>
             </div>
