@@ -17,7 +17,16 @@
             <div class="card-body p-5 pt-4">
                 <form method="post" novalidate>
                     {% csrf_token %}
-                    {{ form|crispy }}
+                    {{ form|as_crispy_errors }}
+                    {% for field in form %}
+                        {% if field.is_hidden %}
+                            {{ field }}
+                        {% else %}
+                            <div class="mb-3">
+                                {{ field|as_crispy_field }}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
                     <button type="submit" class="btn btn-success w-100 btn-lg rounded-pill shadow-sm mt-4 hover-lift">
                         <i class="fas fa-rocket me-2"></i> Register Account
                     </button>
