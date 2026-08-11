@@ -1,6 +1,33 @@
 from django.contrib import admin
+from django.shortcuts import redirect
+from django.urls import reverse
 from django.utils.html import format_html
-from .models import Student, Application, Payment, ReferralCode, SchoolAttended, SSCEResult, UploadedDocument
+from .models import (
+    SiteConfiguration, Student, Application, Payment, ReferralCode,
+    SchoolAttended, SSCEResult, UploadedDocument
+)
+
+
+@admin.register(SiteConfiguration)
+class SiteConfigurationAdmin(admin.ModelAdmin):
+    """
+    Singleton admin: only one Site Configuration row can exist.
+    Clicking the list entry (or the model link) goes straight to its
+    change form so staff can update the application fee in one click.
+    """
+    list_display = ['application_fee', 'updated_at']
+    readonly_fields = ['updated_at']
+    fields = ['application_fee', 'updated_at']
+
+    def has_add_permission(self, request):
+        return not SiteConfiguration.objects.exists()
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+    def changelist_view(self, request, extra_context=None):
+        obj = SiteConfiguration.get_solo()
+        return redirect(reverse('admin:portal_siteconfiguration_change', args=[obj.pk]))
 
 
 @admin.register(Student)

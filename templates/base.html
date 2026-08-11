@@ -18,15 +18,31 @@
 
     <style>
         :root {
-            --primary-color: #0f172a;     /* Slate 900 */
-            --primary-light: #1e293b;     /* Slate 800 */
-            --accent-color: #3b82f6;      /* Blue 500 */
-            --accent-hover: #2563eb;      /* Blue 600 */
+            --primary-color: #1e1b4b;     /* Indigo 950 */
+            --primary-light: #312e81;     /* Indigo 900 */
+            --accent-color: #6366f1;      /* Indigo 500 */
+            --accent-hover: #4f46e5;      /* Indigo 600 */
+            --accent-rgb: 99, 102, 241;
+            --accent-secondary: #a855f7;  /* Purple 500, used in gradients */
+            --highlight-color: #f59e0b;   /* Amber 500 */
             --success-color: #10b981;     /* Emerald 500 */
-            --bg-color: #f8fafc;          /* Slate 50 */
-            --card-bg: rgba(255, 255, 255, 0.9);
-            --text-main: #334155;         /* Slate 700 */
-            --text-heading: #0f172a;      /* Slate 900 */
+            --success-rgb: 16, 185, 129;
+            --bg-color: #f7f7fd;          /* Soft Indigo 50 */
+            --card-bg: rgba(255, 255, 255, 0.92);
+            --text-main: #3f3d63;         /* Indigo-tinted Slate 700 */
+            --text-heading: #1e1b4b;      /* Indigo 950 */
+
+            /* Keep Bootstrap's own utility classes (text-primary, bg-primary,
+               btn-outline-primary, links, form checks, etc.) in sync with the
+               custom palette above, without editing every template. */
+            --bs-primary: var(--accent-color);
+            --bs-primary-rgb: var(--accent-rgb);
+            --bs-link-color: var(--accent-color);
+            --bs-link-color-rgb: var(--accent-rgb);
+            --bs-link-hover-color: var(--accent-hover);
+            --bs-primary-text-emphasis: var(--accent-hover);
+            --bs-primary-bg-subtle: #eef0fd;
+            --bs-primary-border-subtle: #c7cbf7;
         }
 
         body {
@@ -37,9 +53,11 @@
             display: flex;
             flex-direction: column;
             -webkit-font-smoothing: antialiased;
-            background-image: 
-                radial-gradient(at 0% 0%, hsla(217,100%,92%,1) 0, transparent 50%), 
-                radial-gradient(at 100% 100%, hsla(204,100%,94%,1) 0, transparent 50%);
+            background-image:
+                radial-gradient(at 0% 0%, hsla(243, 100%, 94%, 1) 0, transparent 50%),
+                radial-gradient(at 100% 0%, hsla(280, 100%, 95%, 1) 0, transparent 50%),
+                radial-gradient(at 100% 100%, hsla(199, 100%, 94%, 1) 0, transparent 50%),
+                radial-gradient(at 0% 100%, hsla(160, 90%, 94%, 1) 0, transparent 45%);
             background-attachment: fixed;
         }
 
@@ -66,7 +84,7 @@
         
         .navbar-brand i {
             color: var(--accent-color);
-            background: rgba(59, 130, 246, 0.1);
+            background: rgba(var(--accent-rgb), 0.1);
             padding: 8px;
             border-radius: 8px;
         }
@@ -82,7 +100,7 @@
 
         .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active {
             color: var(--accent-color) !important;
-            background-color: rgba(59, 130, 246, 0.05);
+            background-color: rgba(var(--accent-rgb), 0.07);
         }
 
         /* Beautiful Cards */
@@ -133,29 +151,29 @@
         }
 
         .btn-primary {
-            background-color: var(--accent-color);
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
             border: none;
             color: white;
-            box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 4px 6px -1px rgba(var(--accent-rgb), 0.35);
         }
 
         .btn-primary:hover {
-            background-color: var(--accent-hover);
+            background: linear-gradient(135deg, var(--accent-hover), var(--accent-secondary));
             transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4);
+            box-shadow: 0 10px 20px -3px rgba(var(--accent-rgb), 0.45);
             color: white;
         }
-        
+
         .btn-success {
             background-color: var(--success-color);
             border: none;
-            box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.3);
+            box-shadow: 0 4px 6px -1px rgba(var(--success-rgb), 0.3);
         }
-        
+
         .btn-success:hover {
             background-color: #059669; /* Emerald 600 */
             transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.4);
+            box-shadow: 0 10px 15px -3px rgba(var(--success-rgb), 0.4);
         }
 
         /* Form styling */
@@ -170,7 +188,7 @@
 
         .form-control:focus, .form-select:focus {
             border-color: var(--accent-color);
-            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+            box-shadow: 0 0 0 4px rgba(var(--accent-rgb), 0.15);
             background-color: #fff;
         }
 
@@ -268,7 +286,7 @@
         .stepper-item.active .step-counter {
             background-color: var(--accent-color);
             color: white;
-            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+            box-shadow: 0 0 0 4px rgba(var(--accent-rgb), 0.2);
         }
 
         .step-name {
@@ -285,7 +303,7 @@
 
         /* Footer */
         .footer {
-            background-color: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
             color: #f1f5f9;
             padding: 2rem 0;
             margin-top: auto;

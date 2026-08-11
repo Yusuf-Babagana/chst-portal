@@ -5,7 +5,10 @@ from django.contrib import messages
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
-from .models import Student, Application, Payment, ReferralCode, SchoolAttended, SSCEResult, UploadedDocument
+from .models import (
+    SiteConfiguration, Student, Application, Payment, ReferralCode,
+    SchoolAttended, SSCEResult, UploadedDocument
+)
 from .forms import (
     SignupForm, LoginForm, ReferralCodeForm, SectionAForm,
     SchoolAttendedFormSet, SSCEResultFormSet, SectionDForm,
@@ -126,18 +129,20 @@ def payment(request):
         return redirect('dashboard')
 
     reference = f"CHSTH-{request.user.id}-{timezone.now().timestamp()}"
+    application_fee = SiteConfiguration.get_solo().application_fee
 
     Payment.objects.create(
         student=student,
         reference=reference,
-        amount=settings.APPLICATION_FEE,
+        amount=application_fee,
         status='pending'
     )
 
     context = {
         'paystack_public_key': settings.PAYSTACK_PUBLIC_KEY,
         'email': request.user.email,
-        'amount': settings.APPLICATION_FEE * 100,
+        'amount': int(application_fee * 100),
+        'display_amount': application_fee,
         'reference': reference,
     }
 
