@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load humanize %}
 
 {% block title %}Welcome - CHSTH Admission Portal{% endblock %}
 
@@ -12,7 +13,7 @@
             Secure Your Future at <span class="text-primary">CHSTH</span>
         </h1>
         <p class="lead text-muted mb-5 pe-lg-4" style="line-height: 1.8;">
-            Apply seamlessly into the College of Health Sciences and Technology Hadejia. Our modernized portal makes the application process faster, simpler, and entirely digitial.
+            Apply seamlessly to the College of Health Sciences and Technology Hadejia. Our modernized portal makes the application process faster, simpler, and entirely digital.
         </p>
 
         <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center justify-content-lg-start">
@@ -46,7 +47,7 @@
                     <i class="fas fa-money-check-alt fs-2 me-4"></i>
                     <div>
                         <h6 class="fw-bold mb-1 text-uppercase tracking-wider" style="letter-spacing: 1px;">Application Fee</h6>
-                        <h3 class="mb-0 fw-bold text-dark">₦12,550</h3>
+                        <h3 class="mb-0 fw-bold text-dark">₦{{ application_fee|floatformat:0|intcomma }}</h3>
                     </div>
                 </div>
                 
@@ -83,7 +84,7 @@
             <div class="card-body">
                 <div class="bg-white shadow-sm text-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px; font-size: 1.5rem;">2</div>
                 <h5 class="fw-bold">Pay Application Fee</h5>
-                <p class="text-muted">Pay the ₦12,550 fee or provide a valid waiver. Instant processing via Paystack.</p>
+                <p class="text-muted">Pay the ₦{{ application_fee|floatformat:0|intcomma }} fee or provide a valid waiver. Instant processing via Paystack.</p>
             </div>
         </div>
     </div>
