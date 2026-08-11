@@ -1,8 +1,47 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.conf import settings as django_settings
 from django.utils import timezone
 import random
 import string
+
+
+class SiteConfiguration(models.Model):
+    """
+    Singleton model that lets staff manage site-wide settings
+    (currently the application fee) from the Django admin instead
+    of hard-coding them in settings.py.
+    """
+    application_fee = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=django_settings.APPLICATION_FEE,
+        help_text="Amount (₦) charged to applicants for the application form/payment."
+    )
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "Site Configuration"
+        verbose_name_plural = "Site Configuration"
+
+    def __str__(self):
+        return "Site Configuration"
+
+    def save(self, *args, **kwargs):
+        # Enforce singleton: always overwrite the row with pk=1.
+        self.pk = 1
+        super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        pass  # Prevent deletion of the singleton row.
+
+    @classmethod
+    def get_solo(cls):
+        obj, _ = cls.objects.get_or_create(
+            pk=1,
+            defaults={'application_fee': django_settings.APPLICATION_FEE}
+        )
+        return obj
 
 
 class ReferralCode(models.Model):
