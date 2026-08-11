@@ -22,7 +22,8 @@ from django.utils import timezone
 def home(request):
     if request.user.is_authenticated:
         return redirect('dashboard')
-    return render(request, 'portal/home.html')
+    context = {'application_fee': SiteConfiguration.get_solo().application_fee}
+    return render(request, 'portal/home.html', context)
 
 
 def signup_view(request):
@@ -113,7 +114,11 @@ def referral_check(request):
     else:
         form = ReferralCodeForm()
 
-    return render(request, 'portal/referral_check.html', {'form': form})
+    context = {
+        'form': form,
+        'application_fee': SiteConfiguration.get_solo().application_fee,
+    }
+    return render(request, 'portal/referral_check.html', context)
 
 
 @login_required
