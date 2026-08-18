@@ -117,11 +117,11 @@ class SectionDForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # Restrict courses in the template while preserving models
-        allowed_course = [('', '---------'), ('diploma_schew', 'National Diploma in Community Health (ND CHEW)')]
-        self.fields['first_choice'].choices = allowed_course
-        self.fields['second_choice'].choices = allowed_course
-        
+        # All accredited programmes are open for applications.
+        course_choices = [('', '---------')] + list(Application.COURSES)
+        self.fields['first_choice'].choices = course_choices
+        self.fields['second_choice'].choices = course_choices
+
         for field in self.fields:
             self.fields[field].widget.attrs.update({'class': 'form-control'})
 

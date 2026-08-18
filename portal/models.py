@@ -109,12 +109,14 @@ class Application(models.Model):
     )
 
     COURSES = (
-        ('diploma_schew', 'Diploma in Community Health (SCHEW)'),
         ('certificate_jchew', 'Certificate in Community Health (JCHEW)'),
-        ('diploma_him', 'Diploma in Health Information Management'),
-        ('diploma_env_health', 'Diploma in Environmental Health'),
-        ('diploma_xray', 'Diploma in X-Ray and Imaging'),
+        ('diploma_dental_surgery', 'Diploma in Dental Surgery'),
+        ('diploma_schew', 'Diploma in Community Health'),
+        ('diploma_env_health', 'Diploma in Environmental Health Technology'),
+        ('diploma_xray', 'Diploma in Medical Imaging Technology'),
+        ('diploma_medical_lab', 'Diploma in Medical Laboratory'),
         ('diploma_nutrition', 'Diploma in Nutrition and Dietetics'),
+        ('nd_community_health', 'National Diploma in Community Health'),
         ('retraining_jchew', 'Retraining in Community Health (JCHEW holders)'),
     )
 

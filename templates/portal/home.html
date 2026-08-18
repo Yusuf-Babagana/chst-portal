@@ -33,14 +33,16 @@
                     <div class="bg-success text-white rounded p-2 me-3 shadow-sm d-inline-flex">
                         <i class="fas fa-book-medical"></i>
                     </div>
-                    Available Program
+                    Available Programmes
                 </h4>
-                
-                <div class="p-4 bg-light rounded-4 border border-light shadow-sm mb-4">
-                    <div class="d-flex align-items-center">
-                        <i class="fas fa-check-circle text-success fs-4 me-3"></i>
-                        <h5 class="mb-0 fw-bold text-dark">National Diploma in Community Health (ND CHEW)</h5>
+
+                <div class="p-3 bg-light rounded-4 border border-light shadow-sm mb-4" style="max-height: 220px; overflow-y: auto;">
+                    {% for value, label in courses %}
+                    <div class="d-flex align-items-center py-1{% if not forloop.last %} border-bottom{% endif %}">
+                        <i class="fas fa-check-circle text-success me-3"></i>
+                        <span class="fw-semibold text-dark small">{{ label }}</span>
                     </div>
+                    {% endfor %}
                 </div>
 
                 <div class="d-flex align-items-center bg-primary bg-opacity-10 text-primary p-4 rounded-4 mt-4">

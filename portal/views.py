@@ -22,7 +22,10 @@ from django.utils import timezone
 def home(request):
     if request.user.is_authenticated:
         return redirect('dashboard')
-    context = {'application_fee': SiteConfiguration.get_solo().application_fee}
+    context = {
+        'application_fee': SiteConfiguration.get_solo().application_fee,
+        'courses': Application.COURSES,
+    }
     return render(request, 'portal/home.html', context)
 
 
